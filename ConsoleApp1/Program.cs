@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 internal class Program
 {
@@ -7,23 +7,59 @@ internal class Program
         int DisplayTelas_1 = 1;
         string Entrar_cpf_cadastre = "123456789";
         int contador_repeticao = 0;
-        string senha_usuario_colocou = string.Empty;
+        string senha_de_confirmacao = "123456789";
+        float saldo = 0;
+        float Digite = 0;
 
         while (contador_repeticao < 3)
         {
-            Console.WriteLine("Digite SEU CPF: ");
+            Console.WriteLine("Digite Seu CPF: ");
             string cpf = Console.ReadLine();
 
             if (cpf == Entrar_cpf_cadastre)
             {
                 Console.WriteLine("Digite sua senha: ");
-                senha_usuario_colocou = Console.ReadLine();
+                string Senha_Digitada = Console.ReadLine();
 
-                if (senha_usuario_colocou == "123456789")
+                if (senha_de_confirmacao == Senha_Digitada)
                 {
                     Console.WriteLine("Logado.... ");
-                    Console.WriteLine("Saldo: Eur:1000, Pix, Deposito, Trasferencia Bancaria, Doação, \n CDB (deposite e trasforme seu deposito em limite de credito");
-                    break;
+                    Console.WriteLine("Digite para: Saldo[1] Depositar[2] Sacar[3]:   ");
+                    Digite = float.Parse(Console.ReadLine());
+
+                    switch (Digite)
+                    {
+                        case 1:
+                            Console.WriteLine("Saldo = Eur: " + saldo);
+                            continue;
+
+                        case 2:
+                            Console.WriteLine("Seu saldo é: " + saldo + ". Qual a quantia a ser depositada: ");
+                            float Colocar_quantia = float.Parse(Console.ReadLine());
+                            saldo += Colocar_quantia;
+                            Console.WriteLine("Depositado. Seu saldo agora é: " + saldo);
+                            continue;
+
+                        case 3:
+                            Console.WriteLine("Está Disponível o saldo de: " + saldo + ". Qual o valor que deseja sacar: ");
+                            float tirar = float.Parse(Console.ReadLine());
+
+                            if (tirar <= saldo)
+                            {
+                                saldo -= tirar;
+                                Console.WriteLine("Saque realizado. Seu saldo agora é: " + saldo);
+                                continue;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Saldo insuficiente para saque.");
+                                continue;
+                            }
+
+                        default:
+                            Console.WriteLine("Opção inválida.");
+                            continue;
+                    }
                 }
                 else
                 {
